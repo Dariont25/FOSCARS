@@ -8,9 +8,17 @@ class Movie{
     int movieId;
     int year;
     int popularity;
-    int directorName;
+    string directorName;
     int directorId;
 public:
+    Movie(string t, int id, int yr, int pop, string dir, int dirID) {
+        title = t;
+        movieId = id;
+        year = yr;
+        popularity = pop;
+        directorName = dir;
+        directorId = dirID;
+    };
     string getTitle() {
         return title;
     }
@@ -23,7 +31,7 @@ public:
     int getPopularity() {
         return popularity;
     }
-    int getDirectorName() {
+    string getDirectorName() {
         return directorName;
     }
     int getDirectorID() {
