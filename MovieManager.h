@@ -3,38 +3,39 @@
 #include<fstream>
 using namespace std;
 
-class Movie{
+class Movie {
     string title;
-    int movieId;
-    int year;
-    int popularity;
+    string movieId;
+    string year;
     string directorName;
-    int directorId;
+    string directorId;
 public:
-    Movie(string t, int id, int yr, int pop, string dir, int dirID) {
+    long popularity;
+    Movie(string t, string id, string yr, long pop, string dir, string dirID) {
         title = t;
         movieId = id;
         year = yr;
         popularity = pop;
         directorName = dir;
         directorId = dirID;
-    };
+    }
     string getTitle() {
         return title;
     }
-    int getMovieId() {
+    string getMovieId() {
         return movieId;
     }
-    int getYear() {
+    string getYear() {
         return year;
     }
-    int getPopularity() {
+    long getPopularity() {
         return popularity;
     }
     string getDirectorName() {
         return directorName;
     }
-    int getDirectorID() {
+    string getDirectorID() {
         return directorId;
     }
 };
+

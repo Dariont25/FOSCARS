@@ -1,21 +1,17 @@
 #include <iostream>
-#include "readDataFile.h"
-#include "MovieManager.h"
-#include "heapImplementation.h"
-#include "mapImplementation.h"
-#include <iostream>
+#include "readDataFileTest.h"
 
 
 using namespace std;
 
 int main() {
-      string fileName;
-      cin>> fileName;
-      vector<string> movieData;
-      
-      movieData = readFile(fileName);
-      
-      cout << "Hello, World";
-      
-      return 0;
+    vector<Movie> movies;
+
+    movies = readFile("movie_data.csv");
+    for (int i = 0; i < 10; i++) {
+        string title = movies[i].getTitle();
+        cout << title << endl;
+    }
+
+    return 0;
 }
