@@ -22,11 +22,11 @@ vector<string> readFile (string fileName) {
      
      while(!inFile.eof()){
              movieData.push_back(getline(inFile, movieID,','));
-             getline(inFile, title,',');
-             getline(inFile, releaseDate,',');
-             getline(inFile, popularity,',');
-             getline(inFile, directorID,',');
-             getline(inFile, directorName,',');
+             movieData.push_back(getline(inFile, title,','));
+             movieData.push_backgetline((inFile, releaseDate,','));
+             movieData.push_back(getline(inFile, popularity,','));
+             movieData.push_back(getline(inFile, directorID,','));
+             movieData.push_back(getline(inFile, directorName,','));
      }
      
 //      for(int i = 0; i < 6; i++){
