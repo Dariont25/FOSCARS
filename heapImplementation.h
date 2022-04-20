@@ -66,5 +66,63 @@ Movie minHeap::extractMin() {
 
 
 struct maxHeap {
-
+private:
+	vector<Movie> maxHeap;
+public:
+	void insertMovie(Movie m);
+	Movie extractMax();
+	void swap(int x, int y);
 }
+void maxHeap::swap(int x, int y) {
+	Movie temp = maxHeap[x];
+	maxHeap[x] = maxHeap[y];
+	maxHeap[y] = temp;
+}
+void maxHeap::insertMovie(Movie m) {
+	int i = maxHeap.size();
+	maxHeap.push_back(m);
+	if (i > 0) {
+		int mParent = (i - 1) / 2;
+		while (maxHeap[mParent].getPopularity() < maxHeap[i].getPopularity()
+			&& i != 0) {
+			swap(i, mParent);
+			if (mParent == 0) {
+				break;
+			}
+			i = mParent;
+			mParent = (i - 1) / 2;
+		}
+	}
+}
+Movie maxHeap::extractMax() {
+	Movie top = maxHeap[0];
+	int i = maxHeap.size() - 1;
+	maxHeap[0] = maxHeap[i];
+	maxHeap.pop_back();
+	int m = 0;
+	int c1 = (2 * m) + 1;
+	int c2 = (2 * m) + 2;
+	while (maxHeap.size() > c1) {
+		if (maxHeap[m].getPopularity() < maxHeap[c1].getPopularity()) {
+			swap(m, c1);
+			m = c1;
+		}
+		else if (maxHeap.size() > c2) {
+			if (maxHeap[m].getPopularity() < maxHeap[c2].getPopularity()) {
+				swap(m, c2);
+				m = c2;
+			}
+			else {
+				break;
+			}
+		}
+		else {
+			break;
+		}
+		c1 = (2 * m) + 1;
+		c2 = (2 * m) + 1;
+	}
+
+	return top;
+}
+
