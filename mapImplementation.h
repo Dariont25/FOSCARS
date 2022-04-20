@@ -3,12 +3,18 @@
 
 class movieMap {
     Movie movie;
-    map <movie, vector<string> movieInfo> movieMap;
+    map <string, vector<string> movieInfo> movieMap;
 public:
-    void addMovie() {
-
+    void addMovie(vector<string> movieInfo, Movie &movie) {
+        string title = movie.getTitle;
+        movieMap.insert(title, movieInfo);
     }
-    movie returnMovie(int key) {
-        if()
+    movie returnMovie(string title) {
+      
+    }
+    void printAll(&movieMap) {
+        for (auto it = movieMap.begin(); it != movieMap.end(); it++) {
+            cout << it->first << " : " << it->second << endl;
+        }
     }
 };
