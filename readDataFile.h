@@ -4,7 +4,7 @@
 #include<iostream>
 using namespace std;
 
-vector<string> readMubiFile (string fileName) {
+vector<string> readFile (string fileName) {
      string movieID;
      string title;
      string releaseDate;
