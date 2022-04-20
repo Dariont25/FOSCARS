@@ -23,7 +23,7 @@ vector<string> readFile (string fileName) {
      while(!inFile.eof()){
              movieData.push_back(getline(inFile, movieID,','));
              movieData.push_back(getline(inFile, title,','));
-             movieData.push_backgetline((inFile, releaseDate,','));
+             movieData.push_back(getline((inFile, releaseDate,','));
              movieData.push_back(getline(inFile, popularity,','));
              movieData.push_back(getline(inFile, directorID,','));
              movieData.push_back(getline(inFile, directorName,','));
