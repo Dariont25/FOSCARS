@@ -17,7 +17,7 @@ vector<Movie> readFile(string fileName) {
 
     string line;
     getline(inFile, line);
-    while (getline(inFile, line)) {
+    while (getline(inFile,line)) {
         string mID;
         string title;
         string releaseYear;
