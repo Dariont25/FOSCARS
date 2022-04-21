@@ -1,5 +1,7 @@
 #pragma once
 #include <unordered_map>
+#include <set>
+#include <queue>
 #include "MovieManager.h"
 using namespace std;
 
@@ -7,6 +9,8 @@ using namespace std;
 class movieMap{
 public:
 	unordered_map<string, Movie> mMap;
+	set<Movie> popularMovies;
+	set<Movie> worstMovies;
 	movieMap();
 	~movieMap();
 	void addMovie(Movie m) {
@@ -31,6 +35,41 @@ public:
 		for (auto it = mMap.begin(); it != mMap.end(); it++) {
 			cout << it->first << " : " << it->second.getPopularity() << endl;
 		}
+	}
+	set<Movie> getPopularMovies(unordered_map<string, Movie> mMap) {
+		for (auto it = mMap.begin(); it != mMap.end(); it++) {
+			if (it->second.getPopularity() > it++->second.getPopularity() && it->second.getPopularity() != 0)
+			{
+				popularMovies.insert(it->second);
+			}
+		}
+		return popularMovies;
+	}
+	set<Movie> getWorstMovies(unordered_map<string, Movie> mMap) {
+		for (auto it = mMap.begin(); it != mMap.end(); it++) {
+			if (it->second.getPopularity() < it++->second.getPopularity() && it->second.getPopularity() == 0)
+			{
+				worstMovies.insert(it->second);
+			}
+		}
+		return worstMovies;
+	}
+	vector<Movie> getMovieYear(unordered_map<string, Movie> mMap, string year) {
+		vector<Movie> moviesFromYear;
+		for (auto it = mMap.begin(); it != mMap.end(); it++){
+			if (it->second.getYear() == year) {
+				moviesFromYear.push_back(it->second);
+			}
+		}
+		return moviesFromYear;
+	}
+	void printMovie(vector<Movie> movies) {
+		cout << "Movies based on your search:" << endl;
+		int count = 1;
+		for (int i = 0; i < movies.size(); i++){
+			cout << count << ". " << movies[i].title << endl;
+			count++;
+		}	
 	}
 private:
 
