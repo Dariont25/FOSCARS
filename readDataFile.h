@@ -17,11 +17,9 @@ vector<Movie> readFile(string fileName) {
 
     string line;
     getline(inFile, line);
-    while (!inFile.eof()) {
-        //int movieID;
+    while (getline(inFile, line)) {
         string mID;
         string title;
-        // int year;
         string releaseYear;
         long popularity;
         string pop;
@@ -29,7 +27,6 @@ vector<Movie> readFile(string fileName) {
         string directorName;
 
         getline(inFile, mID, ',');
-        cout << mID << endl;
         char n = inFile.peek();
         if (n == '"') {
             getline(inFile, line, '"');
@@ -63,5 +60,6 @@ vector<Movie> readFile(string fileName) {
         Movie movie(title, mID, releaseYear, popularity, directorName, dirID);
         movies.push_back(movie);
     }
+    inFile.close();
     return movies;
 }
