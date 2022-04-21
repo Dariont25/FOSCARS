@@ -1,6 +1,5 @@
 #include<string>
 #include<cmath>
-#include "MovieManager.h"
 using namespace std;
 
 struct minHeap {
@@ -10,7 +9,7 @@ public:
 	void insertMovie(Movie m);
 	Movie extractMin();
 	void swap(int x, int y);
-}
+};
 void minHeap::swap(int x, int y) {
 	Movie temp = minHeap[x];
 	minHeap[x] = minHeap[y];
@@ -72,7 +71,7 @@ public:
 	void insertMovie(Movie m);
 	Movie extractMax();
 	void swap(int x, int y);
-}
+};
 void maxHeap::swap(int x, int y) {
 	Movie temp = maxHeap[x];
 	maxHeap[x] = maxHeap[y];
