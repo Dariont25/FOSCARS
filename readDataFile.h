@@ -2,6 +2,7 @@
 #include<vector>
 #include<fstream>
 #include<iostream>
+#include <sstream>
 #include "MovieManagerTest.h"
 using namespace std;
 
@@ -16,8 +17,10 @@ vector<Movie> readFile(string fileName) {
     }
 
     string line;
-    getline(inFile, line);
-    while (getline(inFile,line)) {
+    string trash;
+    getline(inFile, trash);
+    while (getline(inFile, line)) {
+        stringstream ss(line);
         string mID;
         string title;
         string releaseYear;
@@ -26,39 +29,40 @@ vector<Movie> readFile(string fileName) {
         string dirID;
         string directorName;
 
-        getline(inFile, mID, ',');
-        char n = inFile.peek();
+        getline(ss, mID, ',');
+        char n = ss.peek();
         if (n == '"') {
-            getline(inFile, line, '"');
-            getline(inFile, title, '"');
-            getline(inFile, line, ',');
+            getline(ss, trash, '"');
+            getline(ss, title, '"');
+            getline(ss, trash, ',');
         }
         else {
-            getline(inFile, title, ',');
+            getline(ss, title, ',');
         }
 
-        getline(inFile, releaseYear, ',');
-        getline(inFile, line, ',');
-        getline(inFile, line, ',');
-        getline(inFile, pop, ',');
+        getline(ss, releaseYear, ',');
+        getline(ss, trash, ',');
+        getline(ss, trash, ',');
+        getline(ss, pop, ',');
         popularity = stol(pop);
-        getline(inFile, line, ',');
-        char c = inFile.peek();
+        getline(ss, trash, ',');
+        char c = ss.peek();
         if (c == '"') {
-            getline(inFile, line, '"');
-            getline(inFile, dirID, '"');
-            getline(inFile, line, '"');
-            getline(inFile, directorName, '"');
+            getline(ss, trash, '"');
+            getline(ss, dirID, '"');
+            getline(ss, trash, '"');
+            getline(ss, directorName, '"');
 
         }
         else {
-            getline(inFile, dirID, ',');
-            getline(inFile, directorName, ',');
+            getline(ss, dirID, ',');
+            getline(ss, directorName, ',');
         }
-        getline(inFile, line);
+        getline(ss, trash);
 
         Movie movie(title, mID, releaseYear, popularity, directorName, dirID);
         movies.push_back(movie);
+
     }
     inFile.close();
     return movies;
