@@ -2,15 +2,13 @@
 #include <unordered_map>
 #include <set>
 #include <queue>
-#include "MovieManager.h"
+
 using namespace std;
 
 
-class movieMap{
+class movieMap {
 public:
 	unordered_map<string, Movie> mMap;
-	set<Movie> popularMovies;
-	set<Movie> worstMovies;
 	movieMap();
 	~movieMap();
 	void addMovie(Movie m) {
@@ -18,66 +16,63 @@ public:
 		mMap.insert({ title, m });
 	}
 	void addCollection(vector<Movie> collection) {
-		for (int i = 0; i < collection.size(); i++){
+		for (int i = 0; i < collection.size(); i++) {
 			string title = collection[i].getTitle();
 			mMap.insert({ title, collection[i] });
 		}
 	}
 	void getInfo(string title) {
-		for (auto it = mMap.find(title); it != mMap.end(); it++) {
+		if (mMap.find(title) == mMap.end()) {
+			cout << "Movie Not Found" << endl;
+		}
+		else {
+			auto it = mMap.find(title);
 			int pop = it->second.getPopularity();
 			string dirName = it->second.getDirectorName();
 			string mYear = it->second.getYear();
-			cout << pop << " " << dirName << " " << mYear << endl;
+			cout << "Directed by: " << dirName << endl;
+			cout << "Released in: " << mYear << endl;
+			cout << "Popularity Score: " << pop << endl;
 		}
 	}
-	void printAll(unordered_map<string,Movie> mMap) {
+	void printAll(unordered_map<string, Movie> mMap) {
 		for (auto it = mMap.begin(); it != mMap.end(); it++) {
 			cout << it->first << " : " << it->second.getPopularity() << endl;
 		}
 	}
-	set<Movie> getPopularMovies(unordered_map<string, Movie> mMap) {
-		for (auto it = mMap.begin(); it != mMap.end(); it++) {
-			if (it->second.getPopularity() > it++->second.getPopularity() && it->second.getPopularity() != 0)
-			{
-				popularMovies.insert(it->second);
-			}
-		}
-		return popularMovies;
-	}
-	set<Movie> getWorstMovies(unordered_map<string, Movie> mMap) {
-		for (auto it = mMap.begin(); it != mMap.end(); it++) {
-			if (it->second.getPopularity() < it++->second.getPopularity() && it->second.getPopularity() == 0)
-			{
-				worstMovies.insert(it->second);
-			}
-		}
-		return worstMovies;
-	}
+
 	vector<Movie> getMovieYear(unordered_map<string, Movie> mMap, string year) {
 		vector<Movie> moviesFromYear;
-		for (auto it = mMap.begin(); it != mMap.end(); it++){
+		for (auto it = mMap.begin(); it != mMap.end(); it++) {
 			if (it->second.getYear() == year) {
 				moviesFromYear.push_back(it->second);
 			}
 		}
 		return moviesFromYear;
 	}
+	vector<Movie> getDirectorMovie(unordered_map<string, Movie> mMap, string dir) {
+		vector<Movie> dirMovies;
+		for (auto it = mMap.begin(); it != mMap.end(); it++) {
+			if (it->second.getDirectorName() == dir) {
+				dirMovies.push_back(it->second);
+			}
+		}
+		return dirMovies;
+	}
 	void printMovie(vector<Movie> movies) {
 		cout << "Movies based on your search:" << endl;
 		int count = 1;
-		for (int i = 0; i < movies.size(); i++){
-			cout << count << ". " << movies[i].title << endl;
+		for (int i = 0; i < movies.size(); i++) {
+			cout << count << ". " << movies[i].getTitle() << endl;
 			count++;
-		}	
+		}
 	}
-private:
 
 };
 
-movieMap::movieMap(){
+movieMap::movieMap() {
 }
 
-movieMap::~movieMap(){
+movieMap::~movieMap() {
 }
 
