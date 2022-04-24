@@ -12,7 +12,7 @@ void printMenu() {
     cout << "--------------------" << endl;
     cout << "0. Exit\n";
     cout << "1. Print 10 Popular Movies\n";
-    cout << "2. Print 10 Non-Popular Movies\n";
+    cout << "2. Print 10 Unpopular Movies\n";
     cout << "3. Search by Title\n";
     cout << "4. Search by Year \n";
     cout << "5. Search by Range of Years\n";
